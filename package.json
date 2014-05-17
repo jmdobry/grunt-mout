@@ -1,7 +1,7 @@
 {
   "name": "grunt-mout",
   "description": "Grunt task for creating custom browserify builds of http://moutjs.com.",
-  "version": "1.0.0-beta.2",
+  "version": "1.0.0-beta.3",
   "homepage": "https://github.com/jmdobry/grunt-mout",
   "author": {
     "name": "Jason Dobry",
@@ -37,7 +37,7 @@
     "chai": "^1.9.1"
   },
   "peerDependencies": {
-    "grunt": "^0.4.5"
+    "grunt": "~0.4.x"
   },
   "keywords": [
     "gruntplugin"

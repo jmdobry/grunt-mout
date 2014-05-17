@@ -286,7 +286,9 @@ var modules = [
 
 var defaults = {
 	dest: './.tmp/mout.js',
-	standalone: 'mout'
+	standalone: 'mout',
+	debug: false,
+	spy: false
 };
 
 module.exports = function (grunt) {
@@ -310,14 +312,26 @@ module.exports = function (grunt) {
 				grunt.log.error(err);
 				done(false);
 			} else {
-				grunt.log.ok();
-				done();
+				if (options.spy) {
+					fs.appendFile(options.dest, fs.readFileSync(path.join(process.cwd(), './lib/spy.js'), { encoding: 'utf8' }), function (err) {
+						if (err) {
+							grunt.log.error(err);
+							done(false);
+						} else {
+							grunt.log.ok();
+							done();
+						}
+					});
+				} else {
+					grunt.log.ok();
+					done();
+				}
 			}
 		}
 
 		try {
 			b.on('error', complete);
-			options.dest = this.files[0].dest;
+			options.dest = this.files.length ? this.files[0].dest : defaults.dest;
 
 			if (!('modules' in options)) {
 				files = [];
@@ -341,6 +355,7 @@ module.exports = function (grunt) {
 			grunt.log.write('Writing ' + options.dest + '...');
 			var writable = fs.createWriteStream(path.join(process.cwd(), options.dest));
 			var readable = b.bundle({
+				debug: options.debug,
 				standalone: options.standalone
 			});
 			readable.on('error', complete);

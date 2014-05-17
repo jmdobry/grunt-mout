@@ -40,17 +40,39 @@ grunt.initConfig({
 
 ### Options
 
-#### options.modules
-Type: `Array`
-Default value: `null`
-
-List of [mout.js](http://moutjs.com) modules to include. Omit this option to include all of them
-
 #### dest
 Type: `String`
 Default value: `'./.tmp/mout.js'`
 
 Destination file.
+
+#### options.modules
+Type: `Array`
+Default value: `null`
+
+List of [mout.js](http://moutjs.com) modules to include. Omit this option to include all of them.
+
+#### options.debug
+Type: `Boolean`
+Default value: `false`
+
+Whether to include an inline source map at the bottom of the generated `mout` bundle.
+
+#### options.spy
+Type: `Boolean`
+Default value: `false`
+
+Whether to augment the generated `mout` bundle with methods for recording and printing your app's usage of mout. Use this
+functionality to learn what `mout` modules your app uses, so you can generate a slimmer `mout` build. Methods added to `mout`:
+
+###### `mout.callCount`
+An object containing the call counts.
+
+###### `mout.reset()`
+Reset call counts to zero.
+
+###### `mout.usage()`
+Return an array of the modules that were called. This array will be in the format required for the `options.modules` option of the grunt task.
 
 ### Usage Examples
 

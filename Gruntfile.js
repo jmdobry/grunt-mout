@@ -34,11 +34,19 @@ module.exports = function (grunt) {
 
 		// Configuration to be run (and then tested).
 		mout: {
+			all: {
+				options: {
+					spy: true
+				},
+				dest: tempPath + 'mout.js'
+			},
 			'array-only': {
 				options: {
 					modules: [
 						'mout/array'
-					]
+					],
+					debug: true,
+					spy: true
 				},
 				dest: tempPath + 'mout-array-only.js'
 			},

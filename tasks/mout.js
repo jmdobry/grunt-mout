@@ -304,7 +304,10 @@ module.exports = function (grunt) {
 	grunt.registerMultiTask('mout', 'Grunt task for creating custom browserify builds of http://moutjs.com.', function () {
 		var options = this.options(defaults);
 		var done = this.async();
-		var b = browserify();
+		var b = browserify({
+      debug: options.debug,
+      standalone: options.standalone
+    });
 		var files;
 
 		function complete(err) {
@@ -354,10 +357,7 @@ module.exports = function (grunt) {
 			});
 			grunt.log.write('Writing ' + options.dest + '...');
 			var writable = fs.createWriteStream(path.join(process.cwd(), options.dest));
-			var readable = b.bundle({
-				debug: options.debug,
-				standalone: options.standalone
-			});
+			var readable = b.bundle();
 			readable.on('error', complete);
 			writable.on('error', complete);
 			writable.on('close', function () {

@@ -1,3 +1,7 @@
+# **Unmaintained**
+
+----
+
 # grunt-mout
 
 > Grunt task for creating custom browserify builds of [mout.js](http://moutjs.com).
